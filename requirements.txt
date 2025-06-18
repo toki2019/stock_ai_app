@@ -1,11 +1,11 @@
 streamlit
 yfinance
 pandas
-numpy
+numpy<2.0.0
 scikit-learn
 lightgbm
 matplotlib
 seaborn
-pandas_ta
+pandas_ta==0.3.14b0  # <-- この行を変更：バージョンを明示的に指定
 joblib
-setuptools<68.0.0  # <-- この行を追加
+setuptools<68.0.0
