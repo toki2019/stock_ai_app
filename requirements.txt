@@ -10,3 +10,5 @@ seaborn
 # ta==0.11.0 # <-- ta ライブラリを削除
 joblib
 setuptools<68.0.0
+ta==0.11.0
+
