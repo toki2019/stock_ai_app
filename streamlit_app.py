@@ -73,20 +73,21 @@ def get_stock_data(ticker, start_date, end_date):
 
 @st.cache_data(show_spinner=False) # 特徴量計算の再実行を避けるためにキャッシュ
 # --- 2. データ前処理と特徴量エンジニアリング ---
+# --- 2. データ前処理と特徴量エンジニアリング ---
 def add_features_and_target(df):
     if df.empty:
         return df
 
     df_copy = df.copy() 
-    
-    # テクニカル指標の追加 (ta ライブラリの呼び出しを最適化)
-    
+
+    # テクニカル指標の追加 (pandasの組み込み機能のみを使用)
+
     # SMA (Simple Moving Average)
-    df_copy['SMA_10'] = df_copy['Close'].rolling(window=10).mean() # pandasのrolling().mean()を使用
-    df_copy['SMA_20'] = df_copy['Close'].rolling(window=20).mean() # pandasのrolling().mean()を使用
+    df_copy['SMA_10'] = df_copy['Close'].rolling(window=10).mean()
+    df_copy['SMA_20'] = df_copy['Close'].rolling(window=20).mean()
 
     # RSI (Relative Strength Index)
-    # taライブラリを使用するが、より直接的な関数呼び出しを試す
+    # pandasだけでRSIを計算するロジック (以前に記述済みのはず)
     delta = df_copy['Close'].diff()
     gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
     loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
@@ -94,23 +95,21 @@ def add_features_and_target(df):
     df_copy['RSI_14'] = 100 - (100 / (1 + rs))
 
     # MACD (Moving Average Convergence Divergence)
-    # taライブラリを使用せず、EMAの組み合わせで直接計算
+    # pandasだけでMACDを計算するロジック (以前に記述済みのはず)
     exp1 = df_copy['Close'].ewm(span=12, adjust=False).mean()
     exp2 = df_copy['Close'].ewm(span=26, adjust=False).mean()
     df_copy['MACD'] = exp1 - exp2
     df_copy['MACDs'] = df_copy['MACD'].ewm(span=9, adjust=False).mean()
     df_copy['MACDh'] = df_copy['MACD'] - df_copy['MACDs']
 
-
     # Bollinger Bands
-    # taライブラリを使用せず、直接計算
+    # pandasだけでBollinger Bandsを計算するロジック (以前に記述済みのはず)
     window = 20
     std_dev = df_copy['Close'].rolling(window=window).std()
     ma = df_copy['Close'].rolling(window=window).mean()
-    df_copy['BBL_20_2.0'] = ma - (std_dev * 2) # Lower Band
-    df_copy['BBM_20_2.0'] = ma # Middle Band (SMA)
-    df_copy['BBU_20_2.0'] = ma + (std_dev * 2) # Upper Band
-    # BBB_20_2.0 と BBP_20_2.0 は省略
+    df_copy['BBL_20_2.0'] = ma - (std_dev * 2) 
+    df_copy['BBM_20_2.0'] = ma 
+    df_copy['BBU_20_2.0'] = ma + (std_dev * 2) 
 
 
     # 価格の変化率 (これは変更なし)
@@ -119,9 +118,9 @@ def add_features_and_target(df):
 
     # 目的変数 (これは変更なし)
     df_copy['Target'] = (df_copy['Close'].shift(-1) > df_copy['Close']).astype(int) 
-    
+
     df_copy = df_copy.dropna()
-    
+
     return df_copy
 
 # --- モデルの保存・読み込み ---
