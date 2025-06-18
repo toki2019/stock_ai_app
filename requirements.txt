@@ -1,11 +1,12 @@
+
 streamlit
 yfinance
-pandas
-numpy<2.0.0
+pandas==2.2.2  # <-- pandas も互換性のためバージョンを固定
+numpy==1.26.4  # <-- numpy をエラーが出ないバージョンに固定 (1.26.4)
 scikit-learn
 lightgbm
 matplotlib
 seaborn
-pandas_ta==0.3.14b0  # <-- この行を変更：バージョンを明示的に指定
+pandas_ta==0.3.14b0 # <-- pandas_ta もバージョンを固定
 joblib
 setuptools<68.0.0
