@@ -1,0 +1,6 @@
+[compatibility]
+# pandas_ta compatibility with newer numpy versions on Python 3.13 is unstable.
+# Force Python 3.10 for stable library environment.
+# This will be used by Streamlit Cloud to set the Python version.
+# See: https://docs.streamlit.io/deploy/streamlit-cloud/configure-your-app#python-version
+pythonVersion = "3.10"
