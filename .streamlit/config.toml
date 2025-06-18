@@ -4,3 +4,11 @@
 # This will be used by Streamlit Cloud to set the Python version.
 # See: https://docs.streamlit.io/deploy/streamlit-cloud/configure-your-app#python-version
 pythonVersion = "3.10"
+
+[server]  # <-- このセクションを追加
+# Increase the inotify watch limit to prevent "inotify watch limit reached" error.
+# Default is usually 8192, setting it higher for larger projects.
+# This might help with unexpected crashes on Streamlit Cloud.
+# See: https://docs.streamlit.io/deploy/streamlit-cloud/troubleshooting#inotify-watch-limit-reached
+# fs_notify_limit = 100000 # Streamlit >= 1.29.0
+fileWatcherType = "none" # <-- この行を追加 (これが最も簡単な解決策)
