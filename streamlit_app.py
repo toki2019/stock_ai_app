@@ -2,7 +2,8 @@ import streamlit as st
 import yfinance as yf
 import pandas as pd
 import numpy as np
-import pandas_ta as ta
+# import pandas_ta as ta  # pandas_ta はコメントアウト
+import ta # 新しいライブラリをインポート
 import lightgbm as lgb
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler

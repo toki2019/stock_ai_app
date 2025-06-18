@@ -1,12 +1,12 @@
-
 streamlit
 yfinance
-pandas==2.2.2  # <-- pandas も互換性のためバージョンを固定
-numpy==1.26.4  # <-- numpy をエラーが出ないバージョンに固定 (1.26.4)
+pandas==2.2.2
+numpy==1.24.4
 scikit-learn
 lightgbm
 matplotlib
 seaborn
-pandas_ta==0.3.14b0 # <-- pandas_ta もバージョンを固定
+# pandas_ta==0.3.14b0  # コメントアウトまたは削除
+ta==0.11.0 # <-- この行を追加 (taライブラリのバージョン)
 joblib
 setuptools<68.0.0
