@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+
+# Python / Conda environments
+.venv/
+venv/
+env/
+*.egg-info/
+.conda/
+.ipynb_checkpoints/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.tox/
+.ruff_cache/
+
+# Data
+*.pkl             # モデルファイル (ai_models/*.pkl)
+*.db              # データベースファイル (virtual_portfolio.db)
+*.csv             # 必要なければ生のデータファイル
+
+# Streamlit
+.streamlit/
